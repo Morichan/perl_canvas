@@ -3,6 +3,7 @@ package Line;
 use strict;
 use warnings;
 
+use diagram::Point;
 use diagram::FigureDrawer;
 use base qw/ FigureDrawer /;
 
@@ -11,6 +12,12 @@ sub new {
     my $self = $class->SUPER::new();
     $self->{begin} = Point->new;
     $self->{end} = Point->new;
+
+    if (@_ == 2) {
+        $self->begin($_[0]) if $_[0]->isa("Point");
+        $self->end($_[1]) if $_[1]->isa("Point");
+    }
+
     bless $self, $class;
 }
 
